@@ -9,27 +9,30 @@ import random
 first = input("Please enter the first player:\n") # get names of the players
 second = input("Please enter second player:\n")
 
-def roll_dice(first_player, second_player): # define roll_dice funct
-    first_total = 0
+def roll_dice(first_player, second_player): # define the game funct
+    first_total = 0 # create total score counters
     second_total = 0
-    while first_total < 10 and second_total < 10: # if one of the players hasnt won do the loop
-        subscore_first = 0
-        x = None
+    # if any players reached score 100 end the loop
+    while first_total < 100 and second_total < 100:
+        # define first player loop
+        subscore_first = 0 # create subscore counter                     
+        x = None # define x for while loop
         while x != 0:
+            # if you roll number 1 its second players turn
             print(f"Its {first_player} turn!")
             roll = random.randint(1, 6)
-            if roll == 1:
+            if roll == 1:                           
                 print("Bad luck! You rolled 1")
                 break
+            # if you roll number other than 1 you can choose to keep rolling or locking in your score
             else:
                 print("You rolled: " + str(roll))
-            subscore_first += roll
-            decision_1 = input("Do you want to roll again(type roll) or do you want to lock in your score(type lock)?\n")
-            if decision_1 == "lock":
-                x = 0
-                first_total += subscore_first
-            print(subscore_first)
-            print(first_total)
+                subscore_first += roll
+                decision_1 = input("Do you want to roll again(type roll) or do you want to lock in your score(type lock)?\n")
+                if decision_1 == "lock":
+                    x = 0
+                    first_total += subscore_first
+        # define second player loop
         subscore_second = 0
         y = None
         while y != 0:
@@ -40,13 +43,12 @@ def roll_dice(first_player, second_player): # define roll_dice funct
                 break
             else:
                 print("You rolled: " + str(roll))
-            subscore_second += roll
-            decision_1 = input("Do you want to roll again(type roll) or do you want to lock in your score(type lock)?\n")
-            if decision_1 == "lock":
-                y = 0
-                second_total += subscore_second
-            print(subscore_second)
-            print(second_total)
+                subscore_second += roll
+                decision_1 = input("Do you want to roll again(type roll) or do you want to lock in your score(type lock)?\n")
+                if decision_1 == "lock":
+                    y = 0
+                    second_total += subscore_second
+    # determine who won
     if first_total > second_total:
         print("The winner is: " + first_player + " with score of: " + str(first_total))
     else:
